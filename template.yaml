@@ -4,23 +4,72 @@ Description: >
   sam-app
 
   Sample SAM Template for sam-app
-  
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
-    MemorySize: 128
 
+    Tracing: Active
+  Api:
+    TracingEnabled: true
+Parameters:
+  CustomDomain:
+    Description: The Custom Domain linked to this Stack
+    Type: String
 Resources:
+  ##########################################################################
+  #   API Gateway                                                          #
+  ##########################################################################
+  HelloWorldApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      AccessLogSetting:
+        DestinationArn: !GetAtt HelloWorldApiLogGroup.Arn
+        Format: "{\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"user\":\"$context.identity.user\",\"caller\":\"$context.identity.caller\",\"requestTime\":\"$context.requestTime\",\"httpMethod\":\"$context.httpMethod\",\"resourcePath\":\"$context.resourcePath\",\"status\":\"$context.status\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location: './RestAPIs/openapi.yaml'
+      EndpointConfiguration:
+        Type: REGIONAL
+      MethodSettings:
+        - HttpMethod: '*'
+          LoggingLevel: INFO
+          ResourcePath: '/*'
+          DataTraceEnabled: true
+      OpenApiVersion: 3.0.1
+      StageName: default
+
+  HelloWorldApiMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      BasePath: 'v1'
+      DomainName: !Ref CustomDomain
+      RestApiId: !Ref HelloWorldApi
+      Stage: !Ref HelloWorldApi.Stage
+
+  HelloWorldFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref HelloWorldFunction
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HelloWorldApi}/*/GET/
+
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello-world/
+      CodeUri: functions/hello-world/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
+      Role: !GetAtt HelloWorldFunctionRole.Arn
       Architectures:
         - x86_64
-      Tracing: Active
       Environment:
         Variables:
           POWERTOOLS_SERVICE_NAME: helloWorld
@@ -30,16 +79,57 @@ Resources:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
+            RestApiId: !Ref HelloWorldApi
             Path: /hello
             Method: get
     Metadata: # Manage esbuild properties
       BuildMethod: esbuild
       BuildProperties:
         Minify: true
-        Target: "es2020"
-        # Sourcemap: true # Enabling source maps will create the required NODE_OPTIONS environment variables on your lambda function during sam build
-        EntryPoints: 
-        - app.ts
+        Target: es2020
+        Sourcemap: false
+        EntryPoints:
+          - app.ts
+
+  ##########################################################################
+  #   IAM Role                                                             #
+  ##########################################################################
+  HelloWorldFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Action:
+              - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess
+      Tags:
+        - Key: Lambda:CreatedBy
+          Value: SAM
+
+  ##########################################################################
+  #   Log Group                                                            #
+  ##########################################################################
+  HelloWorldApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "API-Gateway-Access-Logs_${HelloWorldApi}/default"
+      RetentionInDays: 30
+
+  ##########################################################################
+  #   Log Group                                                            #
+  ##########################################################################
+  HelloWorldFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${HelloWorldFunction}"
+      RetentionInDays: 30
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -47,10 +137,10 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   HelloWorldApi:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${HelloWorldApi}.execute-api.${AWS::Region}.amazonaws.com/default/hello/"
   HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
+    Description: Hello World Lambda Function ARN
     Value: !GetAtt HelloWorldFunction.Arn
   HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: Implicit IAM Role created for Hello World function
     Value: !GetAtt HelloWorldFunctionRole.Arn
