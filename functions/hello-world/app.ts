@@ -53,8 +53,8 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent, context: Contex
     if (!segment) {
         response = {
             statusCode: 500,
-            body: "Failed to get segment"
-        }
+            body: 'Failed to get segment',
+        };
         return response;
     }
 
@@ -105,5 +105,4 @@ export const lambdaHandler = async (event: APIGatewayProxyEvent, context: Contex
     }
 
     return response;
-
 };
