@@ -1,11 +1,11 @@
 # sam-app
 
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=bugs)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=coverage)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_spring-maven&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_spring-maven)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=bugs)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=coverage)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
 
 Congratulations, you have just created a Serverless "Hello World" application using the AWS Serverless Application Model (AWS SAM) for the `nodejs18.x` runtime, and options to bootstrap it with [**Powertools for AWS Lambda (TypeScript)**](https://awslabs.github.io/aws-lambda-powertools-typescript/latest/) (Lambda Powertools) utilities for Logging, Tracing and Metrics.
 
