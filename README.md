@@ -1,5 +1,12 @@
 # sam-app
 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=bugs)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=coverage)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+
 Congratulations, you have just created a Serverless "Hello World" application using the AWS Serverless Application Model (AWS SAM) for the `nodejs18.x` runtime, and options to bootstrap it with [**Powertools for AWS Lambda (TypeScript)**](https://awslabs.github.io/aws-lambda-powertools-typescript/latest/) (Lambda Powertools) utilities for Logging, Tracing and Metrics.
 
 Powertools for AWS Lambda (TypeScript) is a developer toolkit to implement Serverless best practices and increase developer velocity.
