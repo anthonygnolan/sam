@@ -1,6 +1,0 @@
-templates:
-  - "**/*.yaml"
-  - "**/*.yml"
-  - "**/*.json"
-ignore_checks:
-  - W2531
