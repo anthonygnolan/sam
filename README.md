@@ -1,8 +1,7 @@
 # sam-app
 
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=bugs)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=bugs)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=coverage)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anthonygnolan_sam&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=anthonygnolan_sam)
